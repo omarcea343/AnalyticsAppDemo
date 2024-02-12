@@ -25,14 +25,13 @@ const Badge = ({ percentage }: { percentage: number }) => {
 
   return (
     <span
-      className={`inline-flex gap-1 items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset
-    ${
-      isPositive
-        ? positiveClassname
-        : isNeutral
-        ? neutralClassname
-        : negativeClassname
-    }`}
+      className={`inline-flex gap-1 items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
+        isPositive
+          ? positiveClassname
+          : isNeutral
+          ? neutralClassname
+          : negativeClassname
+      }`}
     >
       {isPositive ? <ArrowUpRight className="h-3 w-3" /> : null}
       {isNeutral ? <ArrowRight className="h-3 w-3" /> : null}
@@ -51,7 +50,7 @@ const AnalyticsDashboard = ({
   return (
     <div className="flex flex-col gap-6">
       <div className="grid w-full mx-auto grid-cols-1 sm:grid-cols-2 gap-6">
-        <Card className="w-full mx-auto max-w-xs">
+        <Card className="w-full">
           <p className="text-tremor-default text-dark-tremor-content">
             Avg. visitors/day
           </p>
@@ -59,9 +58,9 @@ const AnalyticsDashboard = ({
             {avgVisitorsPerDay}
           </p>
         </Card>
-        <Card className="w-full mx-auto max-w-xs">
+        <Card className="w-full">
           <p className="flex gap-2.5 items-center text-tremor-default text-dark-tremor-content">
-            Visitors Today
+            Visitors today
             <Badge
               percentage={
                 (amtVisitorsToday / Number(avgVisitorsPerDay) - 1) * 100
@@ -81,7 +80,10 @@ const AnalyticsDashboard = ({
         <div className="col-span-3 flex items-center justify-between flex-wrap gap-8">
           {topCountries?.map(([countryCode, number]) => {
             return (
-              <div className="flex items-center gap-3 text-dark-tremor-content-strong">
+              <div
+                key={countryCode}
+                className="flex items-center gap-3 text-dark-tremor-content-strong"
+              >
                 <p className="hidden sm:block text-tremor-content">
                   {countryCode}
                 </p>
@@ -90,6 +92,7 @@ const AnalyticsDashboard = ({
                   svg
                   countryCode={countryCode}
                 />
+
                 <p className="text-tremor-content sm:text-dark-tremor-content-strong">
                   {number}
                 </p>
